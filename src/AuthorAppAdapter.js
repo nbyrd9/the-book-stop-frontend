@@ -30,8 +30,8 @@ class Author {
     }
 
 
-    renderNewAuthorForm() {
+//     renderNewAuthorForm() {
         
-}
+// }
 
 }
