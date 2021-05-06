@@ -62,21 +62,95 @@ function addBook(){
 
     function addBooksClickListeners() {
         document.querySelectorAll('.view-books-author-button').forEach(element => {
-            element.addEventListener('click', viewAuthorBooks)
+            element.addbookListener('click', viewAuthorBooks)
         })
     
         document.querySelectorAll('.add-book-button').forEach(element => {
-            element.addEventListener('click', renderNewBookForm)
+            element.addbookListener('click', renderNewBookForm)
         })
         
         document.querySelectorAll('.edit-book-button').forEach(element => {
-            element.addEventListener("click", editBook)
+            element.addbookListener("click", editBook)
         })
     
         document.querySelectorAll('.delete-book-button').forEach(element => {
-            element.addEventListener("click", deleteBook)
+            element.addbookListener("click", deleteBook)
         })
     
     }
-     
+
+
+    function deleteBook() {
+        let bookId = this.parentElement.getAttribute('book-id')
+    
+        fetch(`http://localhost:3000/${bookId}`, {
+            method: 'DELETE'
+          })
+          .then(resp => resp.json())
+          .then(json => {
+              let selectedBook = document.querySelector(`.card[book-id="${bookId}"]`) 
+              selectedBook.remove()
+          })
+    }
+    
+    
+    
+    function updateBook() { 
+        let bookId = this.book.target.parentElement.getAttribute('book-id')     
+        let bookElement = document.querySelector(`.card[book-id="${bookId}"]`)
+            
+         let book = {
+             title: bookElement.querySelector('#title').value, 
+             description: bookElement.querySelector('#book-description').value, 
+             author_id: bookElement.querySelector('#book-authorId').value,
+         }
+           
+    
+        fetch(`http://localhost:3000/books/${bookId}`, {
+            method: 'PATCH',
+            body: JSON.stringify(book),
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+        })
+        .then(resp => resp.json() )
+        .then(data => {
+             clearAuthorsHtml()
+             getAuthors()  
+             Author.newAuthorForm()
+        })
+    }
+    
+    function renderBookForm (authorId) {
+        let bookForm = document.createElement('form')
+        bookForm.setAttribute("onsubmit", "updateBook(); return false;")
+        bookForm.innerHTML = renderBookFormFields(authorId)
+        return bookForm 
+    }
+    
+    
+    function populateBookForm(data) { 
+        let book = new Book(data)
+        let bookForm = renderBookForm(book.author_id)
+        
+        bookForm.querySelector('#name').value = book.name 
+        bookForm.querySelector('#book-genre').value = book.genre 
+        bookForm.querySelector('#book-author-Id').value = book.author_id 
+        document.querySelector(`.card[book-id="${book.id}"]`).appendChild(bookForm)
+    }
+    
+    function editBook() { 
+        toggleHideDisplay(this)
+    
+        let bookId = this.parentElement.getAttribute('book-id')
+
+        fetch(`http://localhost:3000/books/${bookId}`)
+        .then(resp => resp.json())
+        .then(data => {
+            populateBookForm(data)
+        })
+    }
+    function viewAuthorBooks() {
+        Author.newBookForm()
+        let authorSelectedHtml = this.parentElement.querySelector('.books')
+        toggleHideDisplay(authorSelectedHtml)
+    }
 }
