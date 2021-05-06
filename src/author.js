@@ -95,7 +95,6 @@ function updateAuthor() {
 function editAuthor() {
     let authorId = this.parentElement.getAttribute('data-author-id')
 
-    // Populate the dog form with dog's info
         fetch(`http://localhost:3000/${authorId}`)
         .then(resp => resp.json())
         .then(data => {
