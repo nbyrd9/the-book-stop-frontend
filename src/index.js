@@ -1,1 +1,1 @@
-// fetchAuthors()
+fetchAuthors()
