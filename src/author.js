@@ -18,6 +18,9 @@ const authorFormFields = `
 class Author {
     constructor(data) {
         this.name = data.name
+        this.id = data.id
+        this.books = data.books.map(book => new Book (book))
+        Author.allAuthors.push(this)
     }
 
 
@@ -52,7 +55,7 @@ function fetchAuthors(){
     })
 } 
 
-funtion createAuthor() {
+function createAuthor() {
     const author = {
         name: document.getElementById('name').value
     }
@@ -117,6 +120,7 @@ function deleteAuthor() {
       })
 }
 
+//EVENT LISTENERS
 function addAuthorsClickListeners() {
     document.querySelectorAll('.author-name').forEach(element => {
        element.addEventListener("click", showMoreInfo)
@@ -129,6 +133,26 @@ function addAuthorsClickListeners() {
    document.querySelectorAll('.delete-author-button').forEach(element => {
        element.addEventListener("click", deleteAuthor)
    })
+
+
+   function renderAuthorsHtml(data) {
+    let authorsIndex = document.getElementById("authors-list")
+
+    data.forEach((author) => {
+  
+        let booksIndexHtml = document.createElement('div')
+        booksIndexHtml.className = 'books'
+        booksIndexHtml.style.display = 'none'
+        let emptyBooksHtml = booksIndexHtml
+          
+
+        let newAuthor = new Author(author)
+        booksIndexHtml.innerHTML = newAuthor.authorBooksHtml()     
+   
+        authorsIndex.innerHTML += newAuthor.authorHtml() 
+   
+        let selectedAuthorHtml = document.querySelector(`.card[data-author-id="${newAuthor.id}"]`)           
+        selectedAuthorHtml.append(booksIndexHtml.childElementCount ? booksIndexHtml : emptyBooksHtml )
+        selectedAuthorHtml.querySelector('.books').appendChild(newAuthor.addBooksButton())
+    });
 }
-
-
