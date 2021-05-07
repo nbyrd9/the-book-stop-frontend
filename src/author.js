@@ -1,15 +1,6 @@
 
 
-//     function appendAuthors(authors){
-//         const authorsDiv = document.getElementById('AuthorContainer')
-//         for (let author of authors) {
-//             const li = document.createElement("li")
-//             li.innerText = author.name
-//             authorsDiv.append(li)
-//             appendBooks(author.books, li)
-//         }
-//     }
-
+   
 
 class Author {
     
@@ -91,25 +82,27 @@ class Author {
             }
         }
 
-        static fetchAuthors(){
-            fetch("http://localhost:3000/authors")
-            .then(r => r.json())
-            .then(authors => {
-                if (authors.data) {
-                 
-                    for (let author of authors.data) {
-                        let newAuthor = new Author(author)
-                    }
-                    this.renderAuthors()
-                } else {
-                  
-                    throw new Error (authors.data)
+    static fetchAuthors(){
+        fetch("http://localhost:3000/authors")
+        // debugger
+        .then(r => r.json())
+        .then(authors => {
+            if (authors.data) {
+                
+                for (let author of authors.data) {
+                    let newAuthor = new Author(author)
                 }
+                this.renderAuthors()
+            } else {
+                
+                throw new Error (authors.data)
+            }
+    
+            // addAuthorsClickListeners()
+            // addBooksClickListeners()
+        }).catch(error => alert(error))
         
-                // addAuthorsClickListeners()
-                // addBooksClickListeners()
-            }).catch(error => alert(error))
-        } 
+    } 
 }
 
     
@@ -132,6 +125,17 @@ function createAuthor() {
       });
     
 }
+
+function appendAuthors(authors){
+    const authorsDiv = document.getElementById('AuthorContainer')
+    for (let author of authors) {
+        const li = document.createElement("li")
+        li.innerText = author.name
+        authorsDiv.append(li)
+        appendBooks(author.books, li)
+    }
+}
+
 
 // function updateAuthor() {
 //     let authorId = this.event.target.authorId.value
