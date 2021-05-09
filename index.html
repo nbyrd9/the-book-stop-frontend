@@ -1,30 +1,56 @@
 <!DOCTYPE html>
-
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-  
-    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Book Spot</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
   </head>
+
   <body>
-    <h1 id="header">The Book Spot </h1>
-    <div id="container">
+    <div class="container mx-auto my-4">
+      
+        <div class="header">
+          <h1 class="text-4xl semibold border-b-4 text-green-900 text-center border-black-300">
+           The Book Spot!
+          </h1>
 
-      <form id="authorForm">
-        <label for="">Author Name:</label>
-        <input type="text" id="authorName">
-        <input type="submit" >
-      </form>
+          <br />
+        </div>
 
-      <div id="authorContainer">
+            
+            <div id="author-container">
+          
+                <form id="create-author-form">
+                    <fieldset>
+                        <legend class="text-2xl pt-4 text-green-700" for="author">Add a New Author Below!</legend><br>
+                        <input type="text" name="author_name" class="block float-left w-10/12 p-3 rounded" id="author-input">
+                        <button type="submit" class="block float-right w-2/12"><i class="fa fa-plus p-4 z--1 bg-black-200"></i></button>
+                    </fieldset> 
+                </form><br>
+                
 
-      </div>
+
+                <ul id="author-ul">
+                <h4 class="text-2xl italic text-center">Your Library</h4>
+
+                </ul><br>
+            </div>
+            
+        </section>
     </div>
-    <script type="text/javascript" src="src/author.js">
-    </script>
-    <script type="text/javascript" src="src/book.js">
-    </script>
-    <script  type="text/javascript" src="src/index.js">
-    </script>
+
+    <script src="src/author.js"></script>
+    <script src="src/book.js"></script>
+    <script src="src/index.js"></script>
   </body>
 </html>

@@ -1,27 +1,82 @@
-// function appendBooks(books, element){
-    
-//    for (let book of books){
-       
-//        const bookLi = document.createElement("li")
-//        bookLi.innerText = book.name
-//         element.append(bookLi)
-//    }
-    
-
-// }
-
 class Book {
-    constructor(data) {
-        this.id = data.id
-        this.name = data.attributes.name
-        this.genre = data.attributes.genre
-        this.published = data.attributes.published
-        this.author_id = data.attributes.author_id
+    constructor(book) {
+        this.id = book.id
+        this.name = book.name
+        this.genre = book.genre
+        this.published = book.published
+        this.author_id = book.author_id
+        this.li = document.createElement('li')
     }
 
-    bookHTML() {
-        return `<li id="${this.id}">${this.name} ${this.genre} ${this.published}</li>`
-      }
+//     bookHTML() {
+//         return `<li id="${this.id}">${this.name} ${this.genre} ${this.published}</li>`
+//       }
+
+
+    static createBook(e){
+        e.preventDefault()
+        const bookInput = e.target.children.input.value
+        const bookAuthor = document.getElementById("book-author")
+        const authorId = e.target.parentElement.dataset.id
+        Book.postBooks(bookInput, bookAuthor, authorId)
+
+        e.target.reset()
+    }
+
+    static postBooks(book, bookAuthor, authorId) {
+        fetch(booksURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content: book, 
+                author_id: authorId
+            })
+        })
+        .then(resp => resp.json())
+        .then(book => {
+            let newBook = new Book(book.data)
+            newBook.createBookCard(bookAuthor)
+        })
+        .catch(err => alert(err))
+    }
+
+    createBookCard(bookAuthor) {
+        this.li.id = this.author_id
+        this.li.className = "py-4 subpixel-antialiased font-medium col-span-10 my-2 px-2 bg-white w-5/12 rounded border-green-300 shadow-inner fst-italic"
+        this.li.innerHTML = `${this.name}`
+    
+        const deleteBtn = document.createElement('button')
+        deleteBtn.className = "ml-2 px- float-right p-2 pt-0 mt-1 ml-2 hover:opacity-50 shadow-sm hover:shadow-sm"
+        deleteBtn.innerHTML = `<i class="fa fa-trash-alt"></i>`
+        deleteBtn.addEventListener("click", (_event) => { this.deleteBook() })
+        this.li.appendChild(deleteBtn)
+        bookAuthor.appendChild(this.li)
+    }
+
+
+    deleteBook() {
+        fetch(`${booksURL}/${this.id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        this.li.remove()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 // function addBook(){
@@ -65,24 +120,7 @@ class Book {
 //         booksHtml.appendChild(bookForm)
 //     }
 
-//     function addBooksClickListeners() {
-//         document.querySelectorAll('.view-books-author-button').forEach(element => {
-//             element.addbookListener('click', viewAuthorBooks)
-//         })
-    
-//         document.querySelectorAll('.add-book-button').forEach(element => {
-//             element.addbookListener('click', renderNewBookForm)
-//         })
-        
-//         document.querySelectorAll('.edit-book-button').forEach(element => {
-//             element.addbookListener("click", editBook)
-//         })
-    
-//         document.querySelectorAll('.delete-book-button').forEach(element => {
-//             element.addbookListener("click", deleteBook)
-//         })
-    
-//     }
+//    
 
 
 //     function deleteBook() {
@@ -132,15 +170,6 @@ class Book {
 //     }
     
     
-//     function populateBookForm(data) { 
-//         let book = new Book(data)
-//         let bookForm = renderBookForm(book.author_id)
-        
-//         bookForm.querySelector('#name').value = book.name 
-//         bookForm.querySelector('#book-genre').value = book.genre 
-//         bookForm.querySelector('#book-author-Id').value = book.author_id 
-//         document.querySelector(`.card[book-id="${book.id}"]`).appendChild(bookForm)
-//     }
     
 //     function editBook() { 
 //         toggleHideDisplay(this)
