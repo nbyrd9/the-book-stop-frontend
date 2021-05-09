@@ -4,6 +4,7 @@ class Author {
 
 
     constructor(data) {
+        // debugger
         this.id = data.id
         this.name = data.name
         this.books = data.books
@@ -86,7 +87,7 @@ class Author {
     createAuthorCard() {
         const li = document.createElement('li')
         li.dataset.id = this.id
-        li.className = "my-2 p-4 bg-purple-700 shadow rounded"
+        li.className = "my-2 p-4 bg-pink-700 shadow rounded"
 
         const h1 = document.createElement('h1')
         h1.className = "text-3xl font-semibold text-gray-300 py-3 pt-0"
