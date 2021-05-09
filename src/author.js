@@ -101,7 +101,7 @@ class Author {
 
 
         const bookAuthor = document.createElement('ul')
-        // bookAuthor.setAttribute("id", "book-author")
+        bookAuthor.setAttribute("id", "book-author")
 
 
         this.books.forEach(book => {

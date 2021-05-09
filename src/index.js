@@ -6,12 +6,12 @@ const booksURL = 'http://localhost:3000/books'
 const authorForm = document.getElementById("create-author-form")
 const authorInput = document.getElementById("author-input")
 const authorUL = document.getElementById("author-ul")
-const authorBook = document.createElement('ul')
+const bookAuthor = document.createElement('ul')
 
 
 Author.fetchAuthors()
 
-authorForm.addEventListener('submit', Author.postAuthors)
+authorForm.addEventListener("submit", Author.postAuthors)
 // header.addEventListener('click', reset)
 
 

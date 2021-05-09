@@ -17,7 +17,7 @@ class Book {
         e.preventDefault()
         const bookInput = e.target.children.input.value
         const bookAuthor = document.getElementById("book-author")
-        const authorId = e.target.parentElement.dataset.id
+        const authorId = e.target.parentElement.id
         Book.postBooks(bookInput, bookAuthor, authorId)
 
         e.target.reset()
@@ -30,21 +30,24 @@ class Book {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                content: book, 
+                content: book,
                 author_id: authorId
             })
         })
         .then(resp => resp.json())
         .then(book => {
-            let newBook = new Book(book.data)
+            
+            let newBook = new Book(book)
             newBook.createBookCard(bookAuthor)
         })
+        
         .catch(err => alert(err))
     }
 
     createBookCard(bookAuthor) {
         this.li.id = this.author_id
         this.li.className = "py-4 subpixel-antialiased font-medium col-span-10 my-2 px-2 bg-white w-5/12 rounded border-green-300 shadow-inner fst-italic"
+        
         this.li.innerHTML = `${this.name}`
     
         const deleteBtn = document.createElement('button')
@@ -65,18 +68,6 @@ class Book {
         })
         this.li.remove()
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 // function addBook(){
@@ -122,45 +113,8 @@ class Book {
 
 //    
 
+    
 
-//     function deleteBook() {
-//         let bookId = this.parentElement.getAttribute('book-id')
-    
-//         fetch(`http://localhost:3000/${bookId}`, {
-//             method: 'DELETE'
-//           })
-//           .then(resp => resp.json())
-//           .then(json => {
-//               let selectedBook = document.querySelector(`.card[book-id="${bookId}"]`) 
-//               selectedBook.remove()
-//           })
-//     }
-    
-    
-    
-//     function updateBook() { 
-//         let bookId = this.book.target.parentElement.getAttribute('book-id')     
-//         let bookElement = document.querySelector(`.card[book-id="${bookId}"]`)
-            
-//          let book = {
-//              title: bookElement.querySelector('#title').value, 
-//              description: bookElement.querySelector('#book-description').value, 
-//              author_id: bookElement.querySelector('#book-authorId').value,
-//          }
-           
-    
-//         fetch(`http://localhost:3000/books/${bookId}`, {
-//             method: 'PATCH',
-//             body: JSON.stringify(book),
-//             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
-//         })
-//         .then(resp => resp.json() )
-//         .then(data => {
-//              clearAuthorsHtml()
-//              getAuthors()  
-//              Author.newAuthorForm()
-//         })
-//     }
     
 //     function renderBookForm (authorId) {
 //         let bookForm = document.createElement('form')
@@ -169,22 +123,3 @@ class Book {
 //         return bookForm 
 //     }
     
-    
-    
-//     function editBook() { 
-//         toggleHideDisplay(this)
-    
-//         let bookId = this.parentElement.getAttribute('book-id')
-
-//         fetch(`http://localhost:3000/books/${bookId}`)
-//         .then(resp => resp.json())
-//         .then(data => {
-//             populateBookForm(data)
-//         })
-//     }
-//     function viewAuthorBooks() {
-//         Author.newBookForm()
-//         let authorSelectedHtml = this.parentElement.querySelector('.books')
-//         toggleHideDisplay(authorSelectedHtml)
-//     }
-// }
