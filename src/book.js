@@ -2,15 +2,12 @@ class Book {
     constructor(book) {
         this.id = book.id
         this.name = book.name
-        this.genre = book.genre
-        this.published = book.published
+        // this.genre = book.genre
+        // this.published = book.published
         this.author_id = book.author_id
         this.li = document.createElement('li')
     }
 
-//     bookHTML() {
-//         return `<li id="${this.id}">${this.name} ${this.genre} ${this.published}</li>`
-//       }
 
 
     static createBook(e){
@@ -36,8 +33,9 @@ class Book {
         })
         .then(resp => resp.json())
         .then(book => {
-            
+            // debugger
             let newBook = new Book(book)
+            
             newBook.createBookCard(bookAuthor)
         })
         

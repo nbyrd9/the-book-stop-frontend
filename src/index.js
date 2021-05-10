@@ -1,6 +1,3 @@
-// const header = document.getElementById("header")
-// const form = document.getElementById('authorForm')
-// const mainContainer = document.getElementById('container')
 const authorsURL = 'http://localhost:3000/authors'
 const booksURL = 'http://localhost:3000/books'
 const authorForm = document.getElementById("create-author-form")
@@ -27,14 +24,4 @@ authorForm.addEventListener("submit", Author.postAuthors)
 //   </form>`
 //   addListeners()
 // }
-
-// function addListeners() {
-//     const form = document.getElementById('authorForm')
-//     const div = document.createElement('div')
-//     div.id = "authorContainer"
-//     mainContainer.append(div)
-//     form.addEventListener('submit', Author.createAuthor)
-//    Author.renderAuthors()
-// }
-
 

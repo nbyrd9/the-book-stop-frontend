@@ -3,11 +3,11 @@ class Author {
     static allAuthors = []
 
 
-    constructor(data) {
+    constructor(author) {
         // debugger
-        this.id = data.id
-        this.name = data.name
-        this.books = data.books
+        this.id = author.id
+        this.name = author.name
+        this.books = author.books
         Author.allAuthors.push(this)
     }
 
@@ -86,11 +86,11 @@ class Author {
 
     createAuthorCard() {
         const li = document.createElement('li')
-        li.dataset.id = this.id
+        li.id = this.id
         li.className = "my-2 p-4 bg-pink-700 shadow rounded"
 
         const h1 = document.createElement('h1')
-        h1.className = "text-3xl font-semibold text-gray-300 py-3 pt-0"
+        h1.className = "text-3xl font-semibold text-black-300 py-3 pt-0"
         h1.innerHTML = `${this.name}`
         
         
@@ -98,7 +98,6 @@ class Author {
         deleteBtn.className = "text-xl float-right p-3 pt-0 mt-1 ml-4 hover:opacity-50 shadow-sm hover:shadow-lg"
         deleteBtn.innerHTML = `<i class="fa fa-trash-alt"></i>`
         deleteBtn.addEventListener("click", this.deleteAuthor)
-
 
         const bookAuthor = document.createElement('ul')
         bookAuthor.setAttribute("id", "book-author")
@@ -146,7 +145,7 @@ class Author {
         }
 
     deleteAuthor() {
-        const authorId = this.parentElement.dataset.id
+        const authorId = this.parentElement.id
 
         fetch(`${authorsURL}/${authorId}`, {
             method: "DELETE",
