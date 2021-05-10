@@ -85,6 +85,7 @@ class Author {
 
 
     createAuthorCard() {
+        const authorUL = document.getElementById("author-ul")
         const li = document.createElement('li')
         li.id = this.id
         li.className = "my-2 p-4 bg-pink-700 shadow rounded"
@@ -100,11 +101,12 @@ class Author {
         deleteBtn.addEventListener("click", this.deleteAuthor)
 
         const bookAuthor = document.createElement('ul')
-        bookAuthor.setAttribute("id", "book-author")
+        bookAuthor.setAttribute("id", `book-author-${this.id}`)
 
 
         this.books.forEach(book => {
             let bookObj = new Book(book)
+            // debugger
             bookObj.createBookCard(bookAuthor)
         })
 
@@ -138,7 +140,8 @@ class Author {
         })
         .then(r => r.json())
         .then(authorData => {
-            let newAuthor = new Author(authorData.data)
+            // debugger
+            let newAuthor = new Author(authorData) //forEach undefined? 
             newAuthor.createAuthorCard()
         })
         .catch(error => alert(error))

@@ -15,27 +15,28 @@ class Book {
         const bookInput = e.target.children.input.value
         const bookAuthor = document.getElementById("book-author")
         const authorId = e.target.parentElement.id
-        Book.postBooks(bookInput, bookAuthor, authorId)
+        
+        Book.postBooks(bookInput, authorId)
 
         e.target.reset()
     }
 
-    static postBooks(book, bookAuthor, authorId) {
+    static postBooks(book, authorId) {
         fetch(booksURL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                content: book,
+            body: JSON.stringify({book: {
+                name: book,
                 author_id: authorId
-            })
+            }})
         })
         .then(resp => resp.json())
         .then(book => {
             // debugger
             let newBook = new Book(book)
-            
+            let bookAuthor = document.getElementById(`book-author-${book.author_id}`)
             newBook.createBookCard(bookAuthor)
         })
         
