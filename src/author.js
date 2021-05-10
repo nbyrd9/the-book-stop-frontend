@@ -33,41 +33,6 @@ class Author {
     }
 
 
-    //   createBook(e){
-    //       e.preventDefault()
-    //       console.log(this) //this.id
-    //       //1. what did the user enter and what is the value
-    //       //2. fetch request and send data to backend
-    //       //3. recieve request
-    //       //4. finding element to add it to
-    //       //5. create the element
-    //       //6. append to DOM
-    // //       const name = document.getElementById('bookName').value
-    // //       const options = {
-    // //         method: "POST",
-    // //         headers: {
-    // //           "Content-Type": "application/json",
-    // //           "Accept": "application/json"
-    // //         },
-    // //         body: JSON.stringify({book: {name: name}})
-    // //       }
-      
-    // //       document.getElementById('bookName').value = ""
-      
-    // //       fetch("http://localhost:3000/authors", options)
-    // //       .then(r => r.json())
-    // //       .then(bookObj => {
-    // //         if (bookObj.data) {
-    // //           let newList = new Book(bookObj.data)
-    // //           newList.renderList()
-    // //         } else {
-    // //           throw new Error(bookObj.message)
-    // //         }
-      
-    // //       }).catch((err) => alert(err))
-    // //     }
-    //   }
-
 
     static fetchAuthors(){
         fetch("http://localhost:3000/authors")
@@ -141,7 +106,7 @@ class Author {
         .then(r => r.json())
         .then(authorData => {
             // debugger
-            let newAuthor = new Author(authorData) //forEach undefined? 
+            let newAuthor = new Author(authorData) 
             newAuthor.createAuthorCard()
         })
         .catch(error => alert(error))
