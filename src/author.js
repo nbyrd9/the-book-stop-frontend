@@ -123,6 +123,10 @@ class Author {
         })
         this.parentElement.remove()
     }
+
+
+
+
 }
 
    
@@ -213,8 +217,4 @@ class Author {
     //       }).catch((err) => alert(err))
     //     }
 
-    // static sortAuthor() {
-    //     const sortedAuthor = this.allAuthors.sort((a,b) => a.name.localeCompare(b.name))
-    //    authorUL.innerHTML = ""
-    //    sortedAuthor.forEach(author => author.createAuthorCard())
-    // }
+ 

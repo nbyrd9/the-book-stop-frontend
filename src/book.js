@@ -69,56 +69,7 @@ class Book {
     }
 }
 
-// function addBook(){
-//     const book = {
-//         name: document.getElementById('name').value,
-//         genre: document.getElementById('book-genre').value,
-//         published: document.getElementById('book-published').value,
-//         author_id: document.getElementById('book-author_id').value,
-//     }
-
-//     fetch("http://localhost:3000/books", {
-//         method: 'POST',
-//         body: JSON.stringify(book),
-//         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
-//     })
-//     .then(resp => resp.json())
-//     .then(book => {
-//          clearAuthorsHtml()
-//          getAuthors()
-//       });
-
-//       function renderBookFormFields(authorId) {
-//         return `<label><strong>Name: </strong></label><br/>
-//         <input type="text" id="name"><br/>
-//         <input type="hidden" id="book-authorId" value="${authorId}">
-//         <label><strong>Genre:   </strong></label><br/>
-//         <input type="text" id="book-genre"><br/>  
-//         <label><strong>Published:   </strong></label><br/>
-//         <input type="text" id="book-published"><br/>  
-//         <input type="submit" value="Submit" >
-//         `  
-//     }
-    
-//     function renderNewBookForm() {
-//         let authorId = this.getAttribute('id')
-//         this.style.display = "none"
-//         let booksHtml = this.parentElement
-//         let bookForm = document.createElement('form')
-//         bookForm.setAttribute("onsubmit", "addBook(); return false;")
-//         bookForm.innerHTML = renderBookFormFields(authorId)
-//         booksHtml.appendChild(bookForm)
-//     }
-
-//    
-
     
 
     
-//     function renderBookForm (authorId) {
-//         let bookForm = document.createElement('form')
-//         bookForm.setAttribute("onsubmit", "updateBook(); return false;")
-//         bookForm.innerHTML = renderBookFormFields(authorId)
-//         return bookForm 
-//     }
-    
+
