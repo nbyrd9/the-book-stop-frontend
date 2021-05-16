@@ -2,8 +2,6 @@ class Book {
     constructor(book) {
         this.id = book.id
         this.name = book.name
-        // this.genre = book.genre
-        // this.published = book.published
         this.author_id = book.author_id
         this.li = document.createElement('li')
     }
