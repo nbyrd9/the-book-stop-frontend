@@ -32,7 +32,6 @@ class Book {
         })
         .then(resp => resp.json())
         .then(book => {
-            // debugger
             let newBook = new Book(book)
             let bookAuthor = document.getElementById(`book-author-${book.author_id}`)
             newBook.createBookCard(bookAuthor)

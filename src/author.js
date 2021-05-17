@@ -4,7 +4,6 @@ class Author {
 
 
     constructor(author) {
-        // debugger
         this.id = author.id
         this.name = author.name
         this.books = author.books
@@ -27,7 +26,7 @@ class Author {
             for (let author of authors) {
                 let newAuthor = new Author(author.data)
             }
-            this.renderAuthors() //removed one author after displaying two
+            this.renderAuthors() 
         })
 
     }
@@ -39,7 +38,6 @@ class Author {
         .then(r => r.json())
         .then(authors => {
             for (let author of authors) {
-                // debugger
                 let newAuthor = new Author(author)
             }
             this.renderAuthors()
@@ -71,7 +69,6 @@ class Author {
 
         this.books.forEach(book => {
             let bookObj = new Book(book)
-            // debugger
             bookObj.createBookCard(bookAuthor)
         })
 
@@ -105,7 +102,6 @@ class Author {
         })
         .then(r => r.json())
         .then(authorData => {
-            // debugger
             let newAuthor = new Author(authorData) 
             newAuthor.createAuthorCard()
         })
@@ -123,9 +119,6 @@ class Author {
         })
         this.parentElement.remove()
     }
-
-
-
 
 }
 
