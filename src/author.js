@@ -101,8 +101,8 @@ class Author {
             })
         })
         .then(r => r.json())
-        .then(authorData => {
-            let newAuthor = new Author(authorData) 
+        .then(authorInfo => {
+            let newAuthor = new Author(authorInfo) 
             newAuthor.createAuthorCard()
         })
         .catch(error => alert(error))
